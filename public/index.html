@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Playlist Time Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="script.js"></script>
+</head>
+<body>
+<main>
+  <h1>Playlist Time Finder</h1>
+  <p class="lede">Paste a YouTube playlist link to see how long it takes to watch, and plan which part to watch next.</p>
+
+  <form id="form" novalidate>
+    <label for="url">Playlist link</label>
+    <div class="row">
+      <input id="url" name="url" type="text" autocomplete="off" spellcheck="false" placeholder="https://www.youtube.com/playlist?list=…" required>
+      <button id="go" type="submit">Find total time</button>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <section id="result" hidden aria-labelledby="plTitle">
+    <p class="meta" id="plMeta"></p>
+    <h2 id="plTitle"></h2>
+    <p class="total" id="total"></p>
+    <p class="note" id="note" hidden></p>
+
+    <dl class="stats">
+      <div><dt>Videos</dt><dd id="sCount"></dd></div>
+      <div><dt>Average length</dt><dd id="sAvg"></dd></div>
+      <div><dt>Longest</dt><dd id="sMax"></dd></div>
+      <div><dt>Shortest</dt><dd id="sMin"></dd></div>
+    </dl>
+
+    <h3>Video lengths</h3>
+    <div id="strip" class="strip" role="img" aria-label="Chart of video lengths in playlist order. Use the range fields below to choose videos."></div>
+    <p class="legend"><span class="k k-range"></span>In your range <span class="k k-off"></span>Outside range <span class="k k-done"></span>Watched. Click a bar to mark a video as watched.</p>
+
+    <h3>Range calculator</h3>
+    <div class="calc">
+      <fieldset>
+        <legend>Time for videos</legend>
+        <label>From <input id="from" type="number" min="1" inputmode="numeric"></label>
+        <label>To <input id="to" type="number" min="1" inputmode="numeric"></label>
+        <p class="out" id="rangeOut"></p>
+      </fieldset>
+      <fieldset>
+        <legend>Your progress</legend>
+        <p class="out" id="leftOut"></p>
+        <button type="button" id="reset" class="ghost">Clear watched</button>
+      </fieldset>
+    </div>
+
+    <details open>
+      <summary>Videos</summary>
+      <ol id="list"></ol>
+      <p class="note" id="listInfo"></p>
+      <button type="button" id="more" class="ghost"></button>
+    </details>
+  </section>
+</main>
+</body>
+</html>
